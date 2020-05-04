@@ -16,14 +16,14 @@ class _HomeState extends State<Home> {
         height: MediaQuery.of(context).size.height * 1,
         width: MediaQuery.of(context).size.width * 1,
         decoration: BoxDecoration(
-        gradient: LinearGradient(
+          gradient: LinearGradient(
             colors: [Color(0xFF281b47), Color(0xFF733178)],
             begin: Alignment.bottomCenter,
             end: Alignment.topCenter,
-            stops: [0.6, 1.0],
+            stops: [0.57, 1.0],
             tileMode: TileMode.clamp
+          ),
         ),
-      ),
         child: Column(
           children: <Widget>[
             TopBar(),

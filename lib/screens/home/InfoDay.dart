@@ -20,11 +20,12 @@ class _InfoDayState extends State<InfoDay> {
     var dateTime = DateTime.now();
     int day = dateTime.day;
     int monthNumber = dateTime.month;
+    int year = dateTime.year;
     var months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
 
     String month = months[monthNumber -1];
 
-    return '$day, $month';
+    return '$day de $month, $year';
   }
 
   @override
@@ -41,14 +42,13 @@ class _InfoDayState extends State<InfoDay> {
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 32.0,
-                fontWeight: FontWeight.bold
               )
             ),
             Text(
               _getDate(),
               style: TextStyle(
                 color: Color(0xFFC0C2C5),
-                fontSize: 22.0
+                fontSize: 21.0
               )
             ),
           ],

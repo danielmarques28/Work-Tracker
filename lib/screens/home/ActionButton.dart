@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class ActionButton extends StatefulWidget {
@@ -7,6 +8,7 @@ class ActionButton extends StatefulWidget {
 
 class _ActionButtonState extends State<ActionButton> {
   var _dateTime;
+  double _percentage = 0.0;
   String _buttonState = 'ENTRADA';
 
   @override
@@ -37,31 +39,44 @@ class _ActionButtonState extends State<ActionButton> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.5,
+      height: MediaQuery.of(context).size.height * 0.45,
       width: MediaQuery.of(context).size.width * 1,
       child: Center(
-        child: Ink(
-          decoration: const ShapeDecoration(
-            color: Colors.lightBlue,
-            shape: CircleBorder(),
-          ),
-          child: GestureDetector(
-            onTap: () {
-              _controlButton();
-            },
-            child: ClipOval(
-              child: Container(
-                color: Colors.white,
-                height: 130.0,
-                width: 130.0,
+        child: GestureDetector(
+          onTap: () {
+            _controlButton();
+          },
+          child: Stack(
+            alignment: Alignment.center,
+            children: <Widget>[
+              AnimatedContainer(
+                duration: Duration(milliseconds: 150),
+                height: 160.0,
+                width: 160.0,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.white,
+                  boxShadow: [
+                    _buttonState != 'ENTRADA' ?
+                    BoxShadow(
+                      color: Colors.blueAccent,
+                      blurRadius: 15.0,
+                      spreadRadius: 2.0,
+                    ) : BoxShadow()
+                  ]
+                ),
                 child: Center(
                   child: Text(
                     _buttonState,
-                    style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
-                  )
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 17.0,
+                      fontWeight: FontWeight.w600,
+                    )
+                  ),
                 ),
               ),
-            ),
+            ],
           ),
         ),
       ),

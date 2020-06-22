@@ -1,4 +1,4 @@
-package com.example.myapp
+package com.example.worktracker
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity

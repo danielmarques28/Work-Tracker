@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/screens/TopBar.dart';
-import 'package:myapp/screens/home/InfoDay.dart';
-import 'package:myapp/screens/home/ActionButton.dart';
+import 'package:worktracker/screens/TopBar.dart';
+import 'package:worktracker/screens/home/InfoDay.dart';
+import 'package:worktracker/screens/home/ActionButton.dart';
 
 class Home extends StatefulWidget {
   @override

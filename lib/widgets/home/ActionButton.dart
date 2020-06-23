@@ -8,7 +8,6 @@ class ActionButton extends StatefulWidget {
 
 class _ActionButtonState extends State<ActionButton> {
   var _dateTime;
-  double _percentage = 0.0;
   String _buttonState = 'ENTRADA';
 
   _controlButton() {

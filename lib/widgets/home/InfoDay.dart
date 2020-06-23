@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class InfoDay extends StatefulWidget {
   @override
@@ -7,34 +8,26 @@ class InfoDay extends StatefulWidget {
 
 class _InfoDayState extends State<InfoDay> {
   _getWeekDay() {
-    var dateTime = DateTime.now();
-    int weekDayNumber = dateTime.weekday;
-    var weekDays = ['Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado', 'Domingo'];
-
-    String weekDay = weekDays[weekDayNumber - 1];
+    DateTime dateTimeNow = DateTime.now();
+    String weekDay = DateFormat.EEEE().format(dateTimeNow);
 
     return weekDay.toUpperCase();
   }
 
   _getDate() {
-    var dateTime = DateTime.now();
-    int day = dateTime.day;
-    int monthNumber = dateTime.month;
-    int year = dateTime.year;
-    var months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+    DateTime dateTimeNow = DateTime.now();
+    String dateString = DateFormat.yMMMMd().format(dateTimeNow);
 
-    String month = months[monthNumber -1];
-
-    return '$day de $month, $year';
+    return dateString;
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.23,
+      margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.07),
       child: Center(
         child: Container(
-          height: MediaQuery.of(context).size.height * 0.11,
+          height: MediaQuery.of(context).size.height * 0.1,
           child: Column(
           children: <Widget>[
             Text(

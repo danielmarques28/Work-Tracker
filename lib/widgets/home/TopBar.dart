@@ -6,28 +6,36 @@ class TopBar extends StatefulWidget {
 }
 
 class _TopBarState extends State<TopBar> {
+  InkWell touchButton(context, icon) {
+    return InkWell(
+      onTap: () {
+        print('clicou !!!');
+      },
+      child: IconButton(
+        icon: Icon(icon, color: Colors.white,),
+        onPressed: null,
+        iconSize: 27.0
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    var statusbarHeight = MediaQuery.of(context).padding.top;
-    var barHeight = MediaQuery.of(context).size.height * 0.085;
+    double statusbarHeight = MediaQuery.of(context).padding.top;
+    double barHeight = MediaQuery.of(context).size.height * 0.085;
     return Container(
       padding: EdgeInsets.only(top: statusbarHeight),
-      margin: EdgeInsets.only(left: 4.0, right: 4.0),
+      margin: EdgeInsets.only(
+        left: MediaQuery.of(context).size.width * 0.005,
+        right: MediaQuery.of(context).size.width * 0.005
+      ),
       height: statusbarHeight + barHeight,
       width: MediaQuery.of(context).size.width * 1,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          IconButton(
-            icon: Icon(Icons.history, color: Colors.white,),
-            onPressed: null,
-            iconSize: 27.0
-          ),
-          IconButton(
-            icon: Icon(Icons.settings, color: Colors.white,),
-            onPressed: null,
-            iconSize: 27.0
-          ),
+          touchButton(context, Icons.history),
+          touchButton(context, Icons.settings)
         ],
       ),
     );

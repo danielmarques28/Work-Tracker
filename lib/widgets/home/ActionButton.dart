@@ -11,11 +11,6 @@ class _ActionButtonState extends State<ActionButton> {
   double _percentage = 0.0;
   String _buttonState = 'ENTRADA';
 
-  @override
-  void initState() {
-    super.initState();
-  }
-
   _controlButton() {
     if (_buttonState == 'ENTRADA') {
       setState(() {
@@ -39,7 +34,7 @@ class _ActionButtonState extends State<ActionButton> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.45,
+      height: MediaQuery.of(context).size.height * 0.56,
       width: MediaQuery.of(context).size.width * 1,
       child: Center(
         child: GestureDetector(
@@ -54,16 +49,11 @@ class _ActionButtonState extends State<ActionButton> {
                 height: 160.0,
                 width: 160.0,
                 decoration: BoxDecoration(
+                  border: _buttonState != 'ENTRADA' ? (
+                    Border.all(width: 4.0, color: Colors.orangeAccent)
+                  ) : null,
                   shape: BoxShape.circle,
                   color: Colors.white,
-                  boxShadow: [
-                    _buttonState != 'ENTRADA' ?
-                    BoxShadow(
-                      color: Colors.blueAccent,
-                      blurRadius: 15.0,
-                      spreadRadius: 2.0,
-                    ) : BoxShadow()
-                  ]
                 ),
                 child: Center(
                   child: Text(

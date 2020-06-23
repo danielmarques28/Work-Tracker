@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:worktracker/widgets/home/TopBar.dart';
 import 'package:worktracker/widgets/home/InfoDay.dart';
 import 'package:worktracker/widgets/home/ActionButton.dart';
 import 'package:worktracker/widgets/home/BottomBar.dart';
+import 'package:worktracker/widgets/background.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -12,27 +14,24 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+
     return Scaffold(
       body: Container(
         height: MediaQuery.of(context).size.height * 1,
         width: MediaQuery.of(context).size.width * 1,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Color(0xFF281b47), Color(0xFF733178)],
-            begin: Alignment.bottomCenter,
-            end: Alignment.topCenter,
-            stops: [0.1, 1.0],
-            tileMode: TileMode.clamp
-          ),
-        ),
+        decoration: background(),
         child: Column(
           children: <Widget>[
             TopBar(),
             InfoDay(),
             ActionButton(),
             BottomBar()
-          ],
-        ),
+          ]
+        )
       )
     );
   }

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:worktracker/screens/TopBar.dart';
-import 'package:worktracker/screens/home/InfoDay.dart';
-import 'package:worktracker/screens/home/ActionButton.dart';
+import 'package:worktracker/widgets/home/TopBar.dart';
+import 'package:worktracker/widgets/home/InfoDay.dart';
+import 'package:worktracker/widgets/home/ActionButton.dart';
+import 'package:worktracker/widgets/home/BottomBar.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -20,7 +21,7 @@ class _HomeState extends State<Home> {
             colors: [Color(0xFF281b47), Color(0xFF733178)],
             begin: Alignment.bottomCenter,
             end: Alignment.topCenter,
-            stops: [0.57, 1.0],
+            stops: [0.1, 1.0],
             tileMode: TileMode.clamp
           ),
         ),
@@ -28,7 +29,8 @@ class _HomeState extends State<Home> {
           children: <Widget>[
             TopBar(),
             InfoDay(),
-            ActionButton()
+            ActionButton(),
+            BottomBar()
           ],
         ),
       )

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:worktracker/screens/History.dart';
+import 'package:worktracker/screens/Settings.dart';
+import 'package:worktracker/widgets/SlideRoute.dart';
 
 class TopBar extends StatefulWidget {
   @override
@@ -6,15 +9,25 @@ class TopBar extends StatefulWidget {
 }
 
 class _TopBarState extends State<TopBar> {
-  InkWell touchButton(context, icon) {
-    return InkWell(
-      onTap: () {
-        print('clicou !!!');
-      },
+  Material touchButton(context, icon, button) {
+    return Material(
+      color: Colors.transparent,
       child: IconButton(
-        icon: Icon(icon, color: Colors.white,),
-        onPressed: null,
-        iconSize: 27.0
+        iconSize: 27.0,
+        splashRadius: 21.0,
+        icon: Icon(
+          icon,
+          color: Colors.white,
+        ),
+        onPressed: () {
+          Navigator.push(
+            context,
+            SlideRoute(
+              widget: button == 'history' ? History() : Settings(),
+              side: button == 'history' ? 'left' : 'right'
+            )
+          );
+        },
       ),
     );
   }
@@ -22,20 +35,19 @@ class _TopBarState extends State<TopBar> {
   @override
   Widget build(BuildContext context) {
     double statusbarHeight = MediaQuery.of(context).padding.top;
-    double barHeight = MediaQuery.of(context).size.height * 0.085;
+    double barHeight = MediaQuery.of(context).size.height * 0.08;
     return Container(
       padding: EdgeInsets.only(top: statusbarHeight),
       margin: EdgeInsets.only(
-        left: MediaQuery.of(context).size.width * 0.005,
-        right: MediaQuery.of(context).size.width * 0.005
-      ),
+          left: MediaQuery.of(context).size.width * 0.005,
+          right: MediaQuery.of(context).size.width * 0.005),
       height: statusbarHeight + barHeight,
       width: MediaQuery.of(context).size.width * 1,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          touchButton(context, Icons.history),
-          touchButton(context, Icons.settings)
+          touchButton(context, Icons.history, 'history'),
+          touchButton(context, Icons.settings, 'settings')
         ],
       ),
     );

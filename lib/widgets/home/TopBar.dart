@@ -3,13 +3,8 @@ import 'package:worktracker/screens/History.dart';
 import 'package:worktracker/screens/Settings.dart';
 import 'package:worktracker/widgets/SlideRoute.dart';
 
-class TopBar extends StatefulWidget {
-  @override
-  _TopBarState createState() => _TopBarState();
-}
-
-class _TopBarState extends State<TopBar> {
-  Material touchButton(context, icon, button) {
+class TopBar extends StatelessWidget {
+  Material _touchButton(context, icon, button) {
     return Material(
       color: Colors.transparent,
       child: IconButton(
@@ -46,8 +41,8 @@ class _TopBarState extends State<TopBar> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          touchButton(context, Icons.history, 'history'),
-          touchButton(context, Icons.settings, 'settings')
+          _touchButton(context, Icons.history, 'history'),
+          _touchButton(context, Icons.settings, 'settings')
         ],
       ),
     );

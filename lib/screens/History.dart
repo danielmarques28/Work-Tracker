@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:worktracker/widgets/background.dart';
 
-class History extends StatefulWidget {
-  @override
-  _HistoryState createState() => _HistoryState();
-}
-
-class _HistoryState extends State<History> {
+class History extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

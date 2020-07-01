@@ -31,12 +31,7 @@ class _BottomBarState extends State<BottomBar> {
               fontSize: 25.0,
               fontWeight: FontWeight.bold
             ),
-          ),
-          Text(
-            'H     M',
-            textAlign: TextAlign.center,
-            style: TextStyle(color: Colors.white),
-          ),
+          )
         ],
       )
     );

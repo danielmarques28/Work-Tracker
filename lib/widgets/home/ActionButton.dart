@@ -7,7 +7,7 @@ class ActionButton extends StatefulWidget {
 }
 
 class _ActionButtonState extends State<ActionButton> {
-  var _dateTime;
+  DateTime _dateTime;
   String _buttonState = 'ENTRADA';
 
   _controlButton() {
@@ -33,7 +33,7 @@ class _ActionButtonState extends State<ActionButton> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.56,
+      height: MediaQuery.of(context).size.height * 0.58,
       width: MediaQuery.of(context).size.width * 1,
       child: Center(
         child: GestureDetector(

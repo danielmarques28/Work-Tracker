@@ -1,12 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:worktracker/helpers/CalendarFile.dart';
 import 'package:worktracker/widgets/home/ListCards.dart';
 import 'package:worktracker/widgets/home/TopBar.dart';
 import 'package:worktracker/widgets/home/InfoDay.dart';
 import 'package:worktracker/widgets/home/DayGraph.dart';
 import 'package:worktracker/widgets/background.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  Map<String, dynamic> calendar;
+
+  @override
+  void initState() {
+    super.initState();
+    CalendarFile().readFile().then((value) {
+      setState(() {
+        calendar = value;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([

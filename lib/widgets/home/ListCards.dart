@@ -1,6 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:worktracker/widgets/home/TaskCard.dart';
+
+class Background extends StatelessWidget {
+  Background({@required this.color, @required this.icon, @required this.direction});
+
+  final Color color;
+  final IconData icon;
+  final String direction;
+
+  @override
+  Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+
+    return Align(
+      alignment: Alignment.center,
+      child: Container(
+        alignment: direction == 'startToEnd' ?
+          Alignment.centerLeft : Alignment.centerRight,
+        padding: EdgeInsets.only(left: width * 0.025, right: width * 0.025),
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(40.0)
+        ),
+        child: Icon(icon, color: Colors.white, size: 40.0)
+      )
+    );
+  }
+}
 
 class ListCards extends StatefulWidget {
   ListCards({Key key}) : super(key: key);
@@ -50,31 +76,6 @@ class _ListCardsState extends State<ListCards> {
             )
           );
         }
-      )
-    );
-  }
-}
-
-class Background extends StatelessWidget {
-  Background({@required this.color, @required this.icon, @required this.direction});
-
-  final Color color;
-  final IconData icon;
-  final String direction;
-
-  @override
-  Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.center,
-      child: Container(
-        alignment: direction == 'startToEnd' ?
-          Alignment.centerLeft : Alignment.centerRight,
-        padding: EdgeInsets.only(left: 15.0, right: 15.0),
-        decoration: BoxDecoration(
-          color: color,
-          // borderRadius: BorderRadius.circular(40.0)
-        ),
-        child: Icon(icon, color: Colors.white, size: 40.0)
       )
     );
   }

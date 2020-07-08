@@ -1,26 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
-class InfoDay extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
-
-    return Container(
-      margin: EdgeInsets.only(
-        top: height * 0.07,
-        left: width * 0.05,
-        right: width * 0.05,
-      ),
-      child: Center(
-        child: Container(
-          child: InfoColumn(),
-        )
-      )
-    );
-  }
-}
 
 class InfoColumn extends StatelessWidget {
   _getWeekDay() {
@@ -62,15 +43,39 @@ class InfoColumn extends StatelessWidget {
   }
 }
 
-class WelcomeUser extends StatelessWidget {
-  _decideWelcome() {
-    DateTime datetime = DateTime.now();
-  }
+class InfoDay extends StatefulWidget {
+  final Function callback;
+
+  InfoDay({Key key, @required this.callback}) : super(key : key);
 
   @override
+  _InfoDayState createState() => _InfoDayState();
+}
+
+class _InfoDayState extends State<InfoDay> {
+  @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+
     return Container(
-      child: Text('Bom'),
+      margin: EdgeInsets.only(
+        top: height * 0.04,
+        left: width * 0.04,
+        right: width * 0.04
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: () {
+            Timer(Duration(milliseconds: 200), () => widget.callback?.call(true));
+          },
+          child: Container(
+            padding: EdgeInsets.only(top: height * 0.01, bottom: height * 0.01),
+            child: InfoColumn()
+          )
+        ),
+      )
     );
   }
 }

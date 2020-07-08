@@ -3,8 +3,14 @@ import 'package:worktracker/screens/History.dart';
 import 'package:worktracker/screens/Settings.dart';
 import 'package:worktracker/widgets/SlideRoute.dart';
 
-class TopBar extends StatelessWidget {
-  Material _touchButton(context, icon, button) {
+class TouchButton extends StatelessWidget {
+  final IconData icon;
+  final String type;
+
+  TouchButton({Key key, this.icon, this.type}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return Material(
       color: Colors.transparent,
       child: IconButton(
@@ -18,31 +24,41 @@ class TopBar extends StatelessWidget {
           Navigator.push(
             context,
             SlideRoute(
-              widget: button == 'history' ? History() : Settings(),
-              side: button == 'history' ? 'left' : 'right'
+              widget: type == 'history' ? History() : Settings(),
+              side: type == 'history' ? 'left' : 'right'
             )
           );
         },
       ),
     );
   }
+}
+
+class TopBar extends StatelessWidget {
+  final Function action;
+
+  const TopBar({Key key, this.action}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+    double barHeight = height * 0.07;
     double statusbarHeight = MediaQuery.of(context).padding.top;
-    double barHeight = MediaQuery.of(context).size.height * 0.08;
+
     return Container(
       padding: EdgeInsets.only(top: statusbarHeight),
       margin: EdgeInsets.only(
-          left: MediaQuery.of(context).size.width * 0.005,
-          right: MediaQuery.of(context).size.width * 0.005),
+        left: width * 0.005,
+        right: width * 0.005
+      ),
       height: statusbarHeight + barHeight,
-      width: MediaQuery.of(context).size.width * 1,
+      width: width * 1,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          _touchButton(context, Icons.history, 'history'),
-          _touchButton(context, Icons.settings, 'settings')
+          TouchButton(icon: Icons.history, type: 'history'),
+          TouchButton(icon: Icons.settings, type: 'settings')
         ],
       ),
     );

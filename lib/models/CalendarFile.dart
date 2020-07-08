@@ -11,22 +11,20 @@ class CalendarFile {
   CalendarFile() {
     _fileName = 'calendar.json';
     _fileExists = false;
-    _fileContent = {'calendar': _generateDaysWithRoutines()};
+    _fileContent = _generateDaysWithRoutines();
   }
 
-  List<Object> _generateDaysWithRoutines() {
-    final items = List.generate(365, (i) {
-      final day = DateTime.now().add(Duration(days: -i));
-      return {
-        'day': day.toString().substring(0, 10),
-        'routines': []
-      };
-    });
-    return items;
+  Object _generateDaysWithRoutines() {
+    Map<String, dynamic> calendar = {};
+    for(int i = 364; i >= 0; i--) {
+      DateTime day = DateTime.now().add(Duration(days: -i));
+      calendar[day.toString().substring(0, 10)] = [];
+    }
+    return calendar;
   }
 
   Future<Map<String, dynamic>> readFile() async {
-    String path = await getLocalPath();
+    String path = await _getLocalPath();
     _jsonFile = File('$path/$_fileName');
     _fileExists = _jsonFile.existsSync();
     if(_fileExists) {
@@ -43,19 +41,18 @@ class CalendarFile {
     return json.decode(_jsonFile.readAsStringSync());
   }
 
-  void writeFile(String key, int value) async {
-    String path = await getLocalPath();
+  void writeFile(String date, int value) async {
+    String path = await _getLocalPath();
     _jsonFile = File('$path/$_fileName');
     _fileExists = _jsonFile.existsSync();
     if(_fileExists)
       _fileContent = await readFile();
-    _fileContent[key].append(value);
+    _fileContent[date].append(value);
     _jsonFile.writeAsStringSync(json.encode(_fileContent));
   }
 
-  Future<String> getLocalPath() async {
+  Future<String> _getLocalPath() async {
     Directory directory = await getApplicationDocumentsDirectory();
-
     return directory.path;
   }
 }

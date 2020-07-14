@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:worktracker/screens/History.dart';
 import 'package:worktracker/screens/Settings.dart';
@@ -21,12 +23,8 @@ class TouchButton extends StatelessWidget {
           color: Colors.white,
         ),
         onPressed: () {
-          Navigator.push(
-            context,
-            SlideRoute(
-              widget: type == 'history' ? History() : Settings(),
-              side: type == 'history' ? 'left' : 'right'
-            )
+          Timer(Duration(milliseconds: 100), () =>
+            Navigator.pushNamed(context, '/history')
           );
         },
       ),
@@ -50,15 +48,15 @@ class TopBar extends StatelessWidget {
       padding: EdgeInsets.only(top: statusbarHeight),
       margin: EdgeInsets.only(
         left: width * 0.005,
-        right: width * 0.005
+        right: width * 0.005,
+        bottom: height * 0.02
       ),
-      height: statusbarHeight + barHeight,
-      width: width * 1,
+      height: barHeight + statusbarHeight,
+      width: width,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          TouchButton(icon: Icons.history, type: 'history'),
-          TouchButton(icon: Icons.settings, type: 'settings')
+        children: [
+          TouchButton(icon: Icons.history, type: 'history')
         ],
       ),
     );

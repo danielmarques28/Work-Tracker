@@ -23,7 +23,7 @@ class InfoColumn extends StatelessWidget {
     double textSize = MediaQuery.of(context).textScaleFactor;
 
     return Column(
-      children: <Widget>[
+      children: [
         Text(
           _getWeekDay(),
           style: TextStyle(
@@ -44,9 +44,9 @@ class InfoColumn extends StatelessWidget {
 }
 
 class InfoDay extends StatefulWidget {
-  final Function callback;
+  final Function close;
 
-  InfoDay({Key key, @required this.callback}) : super(key : key);
+  InfoDay({Key key, @required this.close}) : super(key : key);
 
   @override
   _InfoDayState createState() => _InfoDayState();
@@ -60,15 +60,15 @@ class _InfoDayState extends State<InfoDay> {
 
     return Container(
       margin: EdgeInsets.only(
-        top: height * 0.04,
         left: width * 0.04,
         right: width * 0.04
       ),
       child: Material(
         color: Colors.transparent,
         child: InkWell(
+          borderRadius: BorderRadius.circular(7.0),
           onTap: () {
-            Timer(Duration(milliseconds: 200), () => widget.callback?.call(true));
+            Timer(Duration(milliseconds: 200), () => widget.close?.call());
           },
           child: Container(
             padding: EdgeInsets.only(top: height * 0.01, bottom: height * 0.01),

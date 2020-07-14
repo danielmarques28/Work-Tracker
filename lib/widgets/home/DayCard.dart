@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:worktracker/helpers/responsive.dart';
 
 class DayCard extends StatefulWidget {
   final bool active;
@@ -17,11 +18,8 @@ class DayCard extends StatefulWidget {
 class _DayCardState extends State<DayCard> {
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    double textSize = MediaQuery.of(context).textScaleFactor;
-
     return AnimatedContainer(
-      width: width * 0.168,
+      width: deviceWidth(context, 0.168),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(7.0),
         color: widget.active ? Colors.blueAccent : Colors.white24
@@ -35,7 +33,7 @@ class _DayCardState extends State<DayCard> {
             widget.day['day'],
             style: TextStyle(
               color: Colors.white,
-              fontSize: textSize * 26.0,
+              fontSize: textSize(context, 26.0),
               fontWeight: FontWeight.bold
             )
           ),
@@ -43,7 +41,7 @@ class _DayCardState extends State<DayCard> {
             widget.day['weekday'],
             style: TextStyle(
               color: Colors.white70,
-              fontSize: textSize * 15.0
+              fontSize: textSize(context, 15.0)
             )
           )
         ],

@@ -1,9 +1,6 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:worktracker/screens/History.dart';
-import 'package:worktracker/screens/Settings.dart';
-import 'package:worktracker/widgets/SlideRoute.dart';
+import 'package:worktracker/helpers/responsive.dart';
 
 class TouchButton extends StatelessWidget {
   final IconData icon;
@@ -35,24 +32,19 @@ class TouchButton extends StatelessWidget {
 class TopBar extends StatelessWidget {
   final Function action;
 
-  const TopBar({Key key, this.action}) : super(key: key);
+  TopBar({Key key, this.action}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
-    double barHeight = height * 0.07;
-    double statusbarHeight = MediaQuery.of(context).padding.top;
-
     return Container(
-      padding: EdgeInsets.only(top: statusbarHeight),
+      padding: EdgeInsets.only(top: statusBarHeight(context)),
       margin: EdgeInsets.only(
-        left: width * 0.005,
-        right: width * 0.005,
-        bottom: height * 0.02
+        left: deviceWidth(context, 0.005),
+        right: deviceWidth(context, 0.005),
+        bottom: deviceHeigth(context, 0.02)
       ),
-      height: barHeight + statusbarHeight,
-      width: width,
+      height: barHeight(context),
+      width: deviceWidth(context),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:worktracker/helpers/responsive.dart';
 import 'package:worktracker/models/CalendarFile.dart';
 import 'package:worktracker/widgets/home/RowDayCard.dart';
 import 'package:worktracker/widgets/home/InfoDay.dart';
@@ -48,8 +49,8 @@ class _HomeState extends State<Home> {
 
     return Scaffold(
       body: Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
+        height: deviceHeigth(context),
+        width: deviceWidth(context),
         decoration: background(),
         child: CustomScrollView(
           slivers: [

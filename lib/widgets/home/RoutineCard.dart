@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:worktracker/helpers/responsive.dart';
 
 class RoutineCard extends StatefulWidget {
   @override
@@ -11,10 +12,6 @@ class _RoutineCardState extends State<RoutineCard> {
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
-    double textSize = MediaQuery.of(context).textScaleFactor;
-
     return Material(
       color: Colors.transparent,
       child: InkWell(
@@ -24,18 +21,18 @@ class _RoutineCardState extends State<RoutineCard> {
         },
         child: AnimatedContainer(
           duration: Duration(milliseconds: 300),
-          width: width * 0.9,
-          height: height * (_getBigger ? 0.2 : 0.12),
+          width: deviceWidth(context, 0.9),
+          height: deviceHeigth(context, _getBigger ? 0.2 : 0.12),
           decoration: BoxDecoration(
             color: Colors.white24,
             borderRadius: BorderRadius.circular(7.0)
           ),
           child: Container(
             padding: EdgeInsets.only(
-              left: width * 0.05,
-              right: width * 0.05,
-              top: height * 0.015,
-              bottom: height * 0.015
+              left: deviceWidth(context, 0.05),
+              right: deviceWidth(context, 0.05),
+              top: deviceHeigth(context, 0.015),
+              bottom: deviceHeigth(context, 0.015)
             ),
             alignment: Alignment.centerLeft,
             child: Column(
@@ -48,7 +45,7 @@ class _RoutineCardState extends State<RoutineCard> {
                     textAlign: TextAlign.left,
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: textSize * 19.0,
+                      fontSize: textSize(context, 19.0),
                       fontWeight: FontWeight.bold
                     )
                   ),
@@ -59,7 +56,7 @@ class _RoutineCardState extends State<RoutineCard> {
                     'Descrição sobre essa coisa',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: textSize * 15.0,
+                      fontSize: textSize(context, 15.0),
                     )
                   )
                 )

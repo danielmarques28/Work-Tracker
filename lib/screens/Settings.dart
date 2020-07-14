@@ -1,21 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:worktracker/helpers/background.dart';
+import 'package:worktracker/helpers/responsive.dart';
 
 class Settings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double barHeight = height * 0.07;
-    double statusbarHeight = MediaQuery.of(context).padding.top;
-
     return Scaffold(
       body: Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
+        height: deviceHeigth(context),
+        width: deviceWidth(context),
         decoration: background(),
         child: Column(
           children: [
-            Container(height: statusbarHeight + barHeight),
+            Container(height: barHeight(context)),
             Container(child: Text('Settings', style: TextStyle(color: Colors.white)))
           ],
         )

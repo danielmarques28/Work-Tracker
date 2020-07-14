@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:worktracker/helpers/responsive.dart';
 import 'package:worktracker/widgets/home/RoutineCard.dart';
 
 class Background extends StatelessWidget {
@@ -13,11 +14,11 @@ class Background extends StatelessWidget {
     @required this.direction
   });
 
-  List<Widget> _swapRowChildrens(double width, double height) {
+  List<Widget> _swapRowChildrens(BuildContext context) {
     Widget circleIcon = Container(
-      width: width * 0.13,
-      height: height * 0.13,
-      margin: EdgeInsets.only(left: width * 0.02, right: width * 0.02),
+      width: deviceWidth(context, 0.13),
+      height: deviceHeigth(context, 0.13),
+      margin: EdgeInsets.only(left: deviceWidth(context, 0.02), right: deviceWidth(context, 0.02)),
       decoration: BoxDecoration(
         color: color,
         shape: BoxShape.circle
@@ -47,15 +48,12 @@ class Background extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
-
     return Align(
       alignment: direction == 'startToEnd' ?
           Alignment.centerLeft : Alignment.centerRight,
       child: Container(
-        width: width * 0.26,
-        child: Row(children: _swapRowChildrens(width, height))
+        width: deviceWidth(context, 0.26),
+        child: Row(children: _swapRowChildrens(context))
       )
     );
   }
@@ -75,8 +73,6 @@ class _ColumnRoutineCardState extends State<ColumnRoutineCard> {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
     final Widget snackbar = SnackBar(
       duration: Duration(seconds: 3),
       content: Row(
@@ -96,9 +92,9 @@ class _ColumnRoutineCardState extends State<ColumnRoutineCard> {
 
     return Container(
       margin: EdgeInsets.only(
-        left: width * 0.05,
-        right: width * 0.05,
-        bottom: height * 0.018
+        left: deviceWidth(context, 0.05),
+        right: deviceWidth(context, 0.05),
+        bottom: deviceHeigth(context, 0.018)
       ),
       alignment: Alignment.center,
       child: ListView.builder(
@@ -108,7 +104,7 @@ class _ColumnRoutineCardState extends State<ColumnRoutineCard> {
         itemBuilder: (context, index) {
           return Container(
             alignment: Alignment.center,
-            margin: EdgeInsets.only(bottom: height * 0.0125),
+            margin: EdgeInsets.only(bottom: deviceHeigth(context, 0.0125)),
             child: Center(
               child: Dismissible(
                 key: UniqueKey(),

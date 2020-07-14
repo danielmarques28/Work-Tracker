@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:worktracker/helpers/responsive.dart';
 
 class InfoColumn extends StatelessWidget {
   _getWeekDay() {
@@ -20,22 +21,20 @@ class InfoColumn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double textSize = MediaQuery.of(context).textScaleFactor;
-
     return Column(
       children: [
         Text(
           _getWeekDay(),
           style: TextStyle(
             color: Colors.white,
-            fontSize: textSize * 32.0,
+            fontSize: textSize(context, 32.0),
           )
         ),
         Text(
           _getDate(),
           style: TextStyle(
             color: Color(0xFFC0C2C5),
-            fontSize: textSize * 21.0
+            fontSize: textSize(context, 21.0)
           )
         ),
       ],
@@ -55,13 +54,10 @@ class InfoDay extends StatefulWidget {
 class _InfoDayState extends State<InfoDay> {
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
-
     return Container(
       margin: EdgeInsets.only(
-        left: width * 0.04,
-        right: width * 0.04
+        left: deviceWidth(context, 0.04),
+        right: deviceWidth(context, 0.04)
       ),
       child: Material(
         color: Colors.transparent,
@@ -71,7 +67,10 @@ class _InfoDayState extends State<InfoDay> {
             Timer(Duration(milliseconds: 200), () => widget.close?.call());
           },
           child: Container(
-            padding: EdgeInsets.only(top: height * 0.01, bottom: height * 0.01),
+            padding: EdgeInsets.only(
+              top: deviceHeigth(context, 0.01),
+              bottom: deviceHeigth(context, 0.01)
+            ),
             child: InfoColumn()
           )
         ),

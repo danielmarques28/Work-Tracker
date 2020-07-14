@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart';
+import 'package:worktracker/helpers/responsive.dart';
 import 'package:worktracker/widgets/home/DayCard.dart';
 
 class RowDayCard extends StatefulWidget {
@@ -61,9 +62,6 @@ class RowDayCardState extends State<RowDayCard> {
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
-
     return NotificationListener(
       onNotification: (notification) {
         if(notification != null)
@@ -72,10 +70,10 @@ class RowDayCardState extends State<RowDayCard> {
       },
       child: Container(
         margin: EdgeInsets.only(
-          left: width * 0.04,
-          right: width * 0.04,
+          left: deviceWidth(context, 0.04),
+          right: deviceWidth(context, 0.04)
         ),
-        height: height * 0.106,
+        height: deviceHeigth(context, 0.106),
         child: ListView.builder(
           reverse: true,
           shrinkWrap: true,
@@ -100,7 +98,7 @@ class RowDayCardState extends State<RowDayCard> {
                     day: days[index]
                   )
                 ),
-                Container(width: index > 0 ? width * 0.02 : 0)
+                Container(width: deviceWidth(context, index > 0 ? 0.02 : 0))
               ]
             );
           }

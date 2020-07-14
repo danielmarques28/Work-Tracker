@@ -1,34 +1,34 @@
 import 'package:flutter/material.dart';
 
-class ItemCarousel extends StatefulWidget {
+class DayCard extends StatefulWidget {
   final bool active;
   final Map<String, dynamic> day;
 
-  ItemCarousel({
+  DayCard({
     Key key,
     @required this.active,
     @required this.day
   }) : super(key: key);
 
   @override
-  _ItemCarouselState createState() => _ItemCarouselState();
+  _DayCardState createState() => _DayCardState();
 }
 
-class _ItemCarouselState extends State<ItemCarousel> {
+class _DayCardState extends State<DayCard> {
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     double textSize = MediaQuery.of(context).textScaleFactor;
 
-    return Container(
+    return AnimatedContainer(
       width: width * 0.168,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(7.0),
         color: widget.active ? Colors.blueAccent : Colors.white24
       ),
+      duration: Duration(milliseconds: 300),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
@@ -39,7 +39,6 @@ class _ItemCarouselState extends State<ItemCarousel> {
               fontWeight: FontWeight.bold
             )
           ),
-          Container(height: height * 0.015),
           Text(
             widget.day['weekday'],
             style: TextStyle(

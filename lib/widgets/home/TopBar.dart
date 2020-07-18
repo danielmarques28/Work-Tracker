@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:worktracker/helpers/responsive.dart';
 
@@ -15,16 +14,9 @@ class TouchButton extends StatelessWidget {
       child: IconButton(
         iconSize: 27.0,
         splashRadius: 21.0,
-        icon: Icon(
-          icon,
-          color: Colors.white,
-        ),
-        onPressed: () {
-          Timer(Duration(milliseconds: 100), () =>
-            Navigator.pushNamed(context, '/history')
-          );
-        },
-      ),
+        icon: Icon(icon, color: Colors.white),
+        onPressed: () => Navigator.pushNamed(context, '/history'),
+      )
     );
   }
 }
@@ -49,8 +41,8 @@ class TopBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           TouchButton(icon: Icons.history, type: 'history')
-        ],
-      ),
+        ]
+      )
     );
   }
 }

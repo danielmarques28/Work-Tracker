@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:worktracker/helpers/responsive.dart';
 
 class RoutineCard extends StatefulWidget {
+  RoutineCard({Key key, @required this.routine});
+
+  final Map<String, dynamic> routine;
+
   @override
   _RoutineCardState createState() => _RoutineCardState();
 }
@@ -17,7 +21,10 @@ class _RoutineCardState extends State<RoutineCard> {
       child: InkWell(
         onLongPress: () {
           setState(() => _getBigger = true);
-          Timer(Duration(seconds: 5), () => setState(() => _getBigger = false));
+          Timer(
+            Duration(seconds: 5),
+            () => setState(() => _getBigger = false)
+          );
         },
         child: AnimatedContainer(
           duration: Duration(milliseconds: 300),
@@ -41,7 +48,8 @@ class _RoutineCardState extends State<RoutineCard> {
                 Align(
                   alignment: Alignment.topLeft,
                   child: Text(
-                    'Alguma coisa'.toUpperCase(),
+                    'Rotina ${widget.routine['routine_id']} - ${widget.routine['status']}'
+                      .toUpperCase(),
                     textAlign: TextAlign.left,
                     style: TextStyle(
                       color: Colors.white,
@@ -53,7 +61,7 @@ class _RoutineCardState extends State<RoutineCard> {
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'Descrição sobre essa coisa',
+                    'Descrição sobre essa rotina',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: textSize(context, 15.0),

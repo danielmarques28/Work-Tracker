@@ -3,13 +3,40 @@ import 'package:worktracker/helpers/responsive.dart';
 import 'package:worktracker/widgets/home/PieChart.dart';
 
 class DayGraph extends StatefulWidget {
+  DayGraph({@required this.dayRoutines});
+
+  final List<dynamic> dayRoutines;
+
   @override
   _DayGraphState createState() => _DayGraphState();
 }
 
 class _DayGraphState extends State<DayGraph> {
-  int done = 3;
-  int total = 10;
+  int done;
+  int undone;
+  int total;
+
+  @override
+  void initState() {
+    super.initState();
+    setData();
+  }
+
+  void setData() {
+    int doneCount = 0;
+    int undoneCount = 0;
+    for(Map<String, dynamic> dayRoutine in widget.dayRoutines) {
+      if(dayRoutine['status'] == 2)
+        doneCount += 1;
+      else if(dayRoutine['status'] == 3)
+        undoneCount += 1;
+    }
+    setState(() {
+      done = doneCount;
+      undone = undoneCount;
+      total = widget.dayRoutines.length;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,24 +51,19 @@ class _DayGraphState extends State<DayGraph> {
       ),
       alignment: Alignment.center,
       child: Container(
-        decoration: BoxDecoration(
-          shape: BoxShape.circle
-        ),
+        decoration: BoxDecoration(shape: BoxShape.circle),
         child: Stack(
           alignment: Alignment.center,
           children: [
-            CustomPaint(
-              child: Center(),
-              foregroundPainter: PieChart(done: done, total: total),
+            PieChart(
+              done: done,
+              undone: undone,
+              total: total
             ),
             Container(
               width: deviceWidth(context, 0.3),
               alignment: Alignment.center,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.transparent,
-                // border: Border.all(width: 0.5, color: Colors.white)
-              ),
+              decoration: BoxDecoration(shape: BoxShape.circle),
               child: Text(
                 '${(done/total * 100).toInt()}%',
                 style: TextStyle(

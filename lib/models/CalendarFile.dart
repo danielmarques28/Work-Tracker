@@ -27,9 +27,8 @@ class CalendarFile {
     String path = await _getLocalPath();
     _jsonFile = File('$path/$_fileName');
     _fileExists = _jsonFile.existsSync();
-    if(_fileExists) {
+    if(_fileExists)
       return json.decode(_jsonFile.readAsStringSync());
-    }
     else
       return createFile(_jsonFile);
   }

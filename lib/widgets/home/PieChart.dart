@@ -3,66 +3,77 @@ import 'package:flutter/material.dart';
 
 class PieChart extends StatefulWidget {
   PieChart({
+    Key key,
     @required this.done,
     @required this.undone,
     @required this.total
-  });
+  }) : super(key : key);
 
-  final int done;
-  final int undone;
+  final double done;
+  final double undone;
   final int total;
 
   @override
-  _PieChartState createState() => _PieChartState();
+  PieChartState createState() => PieChartState();
 }
 
-class _PieChartState extends State<PieChart>
+class PieChartState extends State<PieChart>
   with SingleTickerProviderStateMixin {
-  double done = 0.0;
-  double undone = 0.0;
-  Animation<double> _animationDone;
-  Animation<double> _animationUndone;
-  AnimationController controller;
+  double _done = 0.0;
+  double _undone = 0.0;
+  Animation<double> _doneAnimation;
+  Animation<double> _undoneAnimation;
+  Tween<double> _doneTween;
+  Tween<double> _undoneTween;
+  AnimationController _controllerAnimation;
 
   @override
   void initState() {
     super.initState();
-    done = widget.done.toDouble();
-    undone = widget.undone.toDouble();
+    setState(() {
+      _done = widget.done;
+      _undone = widget.undone;
+    });
 
-    controller = AnimationController(
-      duration: Duration(milliseconds: 1600),
+    _controllerAnimation = AnimationController(
+      duration: Duration(milliseconds: 600),
       vsync: this
     );
 
-    controller.forward();
+    _controllerAnimation.forward();
 
-    controller.addStatusListener((status) {
-      if (status == AnimationStatus.dismissed)
-        controller.forward();
-    });
-
-    _animationDone = Tween(begin: 0.0, end: done).animate(controller)
+    _doneTween = Tween(begin: 0.0, end: _done);
+    _doneAnimation = _doneTween.animate(_controllerAnimation)
       ..addListener(() {
-        setState(() {
-          done = _animationDone.value;
-        });
+        setState(() => _done = _doneAnimation.value);
       });
 
-    _animationUndone = Tween(begin: 0.0, end: undone).animate(controller)
+    _undoneTween = Tween(begin: 0.0, end: _undone);
+    _undoneAnimation = _undoneTween.animate(_controllerAnimation)
       ..addListener(() {
-        setState(() {
-          undone = _animationUndone.value;
-        });
+        setState(() => _undone = _undoneAnimation.value);
       });
   }
+
+  void setData(double doneCount, double undoneCount) {
+    _doneTween.begin = _doneTween.end;
+    _controllerAnimation.reset();
+    _doneTween.end = doneCount;
+    _controllerAnimation.forward();
+
+    _undoneTween.begin = _undoneTween.end;
+    _controllerAnimation.reset();
+    _undoneTween.end = undoneCount;
+    _controllerAnimation.forward();
+  }
+
   @override
   Widget build(BuildContext context) {
     return CustomPaint(
       child: Container(),
       painter: PieChartPainter(
-        done: done,
-        undone: undone,
+        done: _done,
+        undone: _undone,
         total: widget.total
       )
     );
@@ -123,5 +134,5 @@ class PieChartPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(CustomPainter oldDelegate) => true;
+  bool shouldRepaint(PieChartPainter oldDelegate) => true;
 }

@@ -20,7 +20,7 @@ class RowDayCard extends StatefulWidget {
 }
 
 class RowDayCardState extends State<RowDayCard> {
-  List<Map<String, dynamic>> days;
+  List<dynamic> days;
   int activeIndex = 0;
   Timer countdown;
 
@@ -32,7 +32,7 @@ class RowDayCardState extends State<RowDayCard> {
   }
 
   void _generateDaysList() {
-    List<Map<String, dynamic>> items = List.generate(7, (index) {
+    List<dynamic> items = List.generate(7, (index) {
       final DateTime dateTimeNow = DateTime.now().add(Duration(days: -index));
       final String weekday = DateFormat.EEEE().format(dateTimeNow);
       final Object day = {

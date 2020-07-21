@@ -1,20 +1,23 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:worktracker/helpers/responsive.dart';
 
 class InfoColumn extends StatelessWidget {
+  InfoColumn({@required this.selectedDate});
+
+  final String selectedDate;
+
   _getWeekDay() {
-    DateTime dateTimeNow = DateTime.now();
-    String weekDay = DateFormat.EEEE().format(dateTimeNow);
+    DateTime dateTime = DateTime.parse(selectedDate);
+    String weekDay = DateFormat.EEEE().format(dateTime);
 
     return weekDay.toUpperCase();
   }
 
   _getDate() {
-    DateTime dateTimeNow = DateTime.now();
-    String dateString = DateFormat.yMMMMd().format(dateTimeNow);
+    DateTime dateTime = DateTime.parse(selectedDate);
+    String dateString = DateFormat.yMMMMd().format(dateTime);
 
     return dateString;
   }
@@ -36,22 +39,27 @@ class InfoColumn extends StatelessWidget {
             color: Color(0xFFC0C2C5),
             fontSize: textSize(context, 21.0)
           )
-        ),
-      ],
+        )
+      ]
     );
   }
 }
 
 class InfoDay extends StatefulWidget {
-  final Function close;
+  InfoDay({
+    Key key,
+    @required this.close,
+    @required this.selectedDate
+  }) : super(key : key);
 
-  InfoDay({Key key, @required this.close}) : super(key : key);
+  final Function close;
+  final String selectedDate;
 
   @override
-  _InfoDayState createState() => _InfoDayState();
+  InfoDayState createState() => InfoDayState();
 }
 
-class _InfoDayState extends State<InfoDay> {
+class InfoDayState extends State<InfoDay> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -64,14 +72,17 @@ class _InfoDayState extends State<InfoDay> {
         child: InkWell(
           borderRadius: BorderRadius.circular(7.0),
           onTap: () {
-            Timer(Duration(milliseconds: 200), () => widget.close?.call());
+            Timer(
+              Duration(milliseconds: 200),
+              () => widget.close?.call()
+            );
           },
           child: Container(
             padding: EdgeInsets.only(
               top: deviceHeigth(context, 0.01),
               bottom: deviceHeigth(context, 0.01)
             ),
-            child: InfoColumn()
+            child: InfoColumn(selectedDate: widget.selectedDate)
           )
         ),
       )

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:worktracker/helpers/background.dart';
 import 'package:worktracker/helpers/responsive.dart';
+import 'package:worktracker/widgets/GoBackTopBar.dart';
 
 class Settings extends StatelessWidget {
   @override
@@ -12,9 +13,8 @@ class Settings extends StatelessWidget {
         decoration: background(),
         child: Column(
           children: [
-            Container(height: barHeight(context)),
-            Container(child: Text('Settings', style: TextStyle(color: Colors.white)))
-          ],
+            GoBackTopBar(screenName: 'Configurações')
+          ]
         )
       )
     );

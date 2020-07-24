@@ -25,5 +25,5 @@ double barHeight(BuildContext context) {
 }
 
 double topBarHeight(BuildContext context) {
-  return deviceHeigth(context, 0.07);
+  return 52.0;
 }

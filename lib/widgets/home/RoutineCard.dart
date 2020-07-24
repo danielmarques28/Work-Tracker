@@ -36,8 +36,8 @@ class _RoutineCardState extends State<RoutineCard> {
           print('routine card long press');
         },
         child: Container(
-          width: deviceWidth(context, 0.9),
-          height: deviceHeigth(context, 0.12),
+          width: deviceWidth(context, 0.95),
+          height: 89.0,
           decoration: BoxDecoration(
             color: _decideCardColor(),
             borderRadius: BorderRadius.circular(7.0)
@@ -71,7 +71,7 @@ class _RoutineCardState extends State<RoutineCard> {
                     'Descrição sobre essa rotina',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: textSize(context, 15.0),
+                      fontSize: textSize(context, 15.0)
                     )
                   )
                 )

@@ -186,35 +186,29 @@ class ColumnRoutineCardState extends State<ColumnRoutineCard> {
 
   Widget _buildItem(routine, index, animation) {
     return Container(
-      alignment: Alignment.center,
-      margin: EdgeInsets.only(
-        bottom: deviceHeigth(context, 0.0125)
-      ),
+      margin: EdgeInsets.only(bottom: 9.0),
       child: _buildDismissible(routine, index, animation)
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: deviceWidth(context, 0.9),
-      margin: EdgeInsets.only(
-        left: deviceWidth(context, 0.05),
-        right: deviceWidth(context, 0.05),
-        bottom: deviceHeigth(context, 0.018)
-      ),
-      alignment: Alignment.center,
-      child: _dayRoutines.length > 0
-        ? AnimatedList(
-            physics: NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            key: _listGlobalKey,
-            initialItemCount: _dayRoutines.length,
-            itemBuilder: (context, index, animation) {
-              return _buildItem(_dayRoutines[index], index, animation);
-            }
-          )
-        : Container()
+    return Center(
+      child: Container(
+        width: deviceWidth(context, 0.95),
+        margin: EdgeInsets.only(bottom: 9.0),
+        child: _dayRoutines.length > 0
+          ? AnimatedList(
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              key: _listGlobalKey,
+              initialItemCount: _dayRoutines.length,
+              itemBuilder: (context, index, animation) {
+                return _buildItem(_dayRoutines[index], index, animation);
+              }
+            )
+          : Container()
+      )
     );
   }
 }

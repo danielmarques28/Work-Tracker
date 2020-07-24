@@ -19,6 +19,7 @@ class _DayCardState extends State<DayCard> {
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
+      height: 79.0,
       width: deviceWidth(context, 0.168),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(7.0),

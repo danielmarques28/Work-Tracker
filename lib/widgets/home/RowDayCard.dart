@@ -13,16 +13,16 @@ class RowDayCard extends StatefulWidget {
     Key key,
     @required this.updateSelectedDate,
     @required this.close
-  }) : super(key : key);
+  }) : super(key: key);
 
   @override
   RowDayCardState createState() => RowDayCardState();
 }
 
 class RowDayCardState extends State<RowDayCard> {
-  List<dynamic> days;
-  int activeIndex = 0;
-  Timer countdown;
+  List<dynamic> _days;
+  int _activeIndex = 0;
+  Timer _countdown;
 
   @override
   void initState() {
@@ -33,7 +33,8 @@ class RowDayCardState extends State<RowDayCard> {
 
   void _generateDaysList() {
     List<dynamic> items = List.generate(7, (index) {
-      final DateTime dateTimeNow = DateTime.now().add(Duration(days: -index));
+      final DateTime dateTimeNow
+        = DateTime.now().add(Duration(days: -index));
       final String weekday = DateFormat.EEEE().format(dateTimeNow);
       final Object day = {
         'date': dateTimeNow,
@@ -45,18 +46,18 @@ class RowDayCardState extends State<RowDayCard> {
     });
 
     setState(() {
-      days = items;
+      _days = items;
     });
   }
 
   void startCountdown() {
     setState(() {
-      countdown = Timer(Duration(seconds: 5), () => widget.close?.call());
+      _countdown = Timer(Duration(seconds: 5), () => widget.close?.call());
     });
   }
 
-  void restartCountdown() {
-    countdown.cancel();
+  void _restartCountdown() {
+    _countdown.cancel();
     startCountdown();
   }
 
@@ -65,20 +66,21 @@ class RowDayCardState extends State<RowDayCard> {
     return NotificationListener(
       onNotification: (notification) {
         if(notification != null)
-          restartCountdown();
-        return false;
+          _restartCountdown();
+        return true;
       },
       child: Container(
         margin: EdgeInsets.only(
+          top: 38.0,
           left: deviceWidth(context, 0.04),
           right: deviceWidth(context, 0.04)
         ),
-        height: deviceHeigth(context, 0.106),
+        height: 79.0,
         child: ListView.builder(
           reverse: true,
           shrinkWrap: true,
           scrollDirection: Axis.horizontal,
-          itemCount: days.length,
+          itemCount: _days.length,
           itemBuilder: (context, index) {
             return Row(
               children: [
@@ -86,16 +88,16 @@ class RowDayCardState extends State<RowDayCard> {
                   borderRadius: BorderRadius.circular(7.0),
                   onTap: () {
                     setState(() {
-                      activeIndex = index;
+                      _activeIndex = index;
                     });
-                    final String date = days[index]['date']
+                    final String date = _days[index]['date']
                       .toString()
                       .substring(0, 10);
                     widget.updateSelectedDate(date);
                   },
                   child: DayCard(
-                    active: index == activeIndex,
-                    day: days[index]
+                    active: index == _activeIndex,
+                    day: _days[index]
                   )
                 ),
                 Container(width: deviceWidth(context, index > 0 ? 0.02 : 0))

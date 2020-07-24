@@ -63,21 +63,21 @@ class InfoDayState extends State<InfoDay> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(
-        left: deviceWidth(context, 0.04),
-        right: deviceWidth(context, 0.04)
-      ),
+      alignment: Alignment.center,
+      margin: EdgeInsets.only(top: 38.0),
       child: Material(
         color: Colors.transparent,
         child: InkWell(
           borderRadius: BorderRadius.circular(7.0),
           onTap: () {
             Timer(
-              Duration(milliseconds: 200),
+              Duration(milliseconds: 150),
               () => widget.close?.call()
             );
           },
           child: Container(
+            height: 79.0,
+            width: deviceWidth(context, 0.95),
             padding: EdgeInsets.only(
               top: deviceHeigth(context, 0.01),
               bottom: deviceHeigth(context, 0.01)

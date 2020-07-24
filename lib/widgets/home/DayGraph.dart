@@ -6,7 +6,7 @@ class DayGraph extends StatefulWidget {
   DayGraph({
     Key key,
     @required this.dayRoutines
-  }) : super(key : key);
+  }) : super(key: key);
 
   final List<dynamic> dayRoutines;
 
@@ -69,7 +69,7 @@ class DayGraphState extends State<DayGraph>
     }
   }
 
-  getPercentage() {
+  String getPercentage() {
     if(total != null && total != 0)
       return '${(_textAnimation.value/total * 100).toInt()}%';
     else {
@@ -80,13 +80,11 @@ class DayGraphState extends State<DayGraph>
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: deviceHeigth(context, 0.32),
-      width: deviceHeigth(context, 0.9),
-      margin: EdgeInsets.only(
-        left: deviceHeigth(context, 0.05),
-        right: deviceHeigth(context, 0.05),
-        top: deviceHeigth(context, 0.12),
-        bottom: deviceHeigth(context, 0.12)
+      height: 220.0,
+      width: deviceWidth(context, 0.95),
+      margin: EdgeInsets.symmetric(
+        horizontal: deviceWidth(context, 0.025),
+        vertical: 90.0
       ),
       alignment: Alignment.center,
       child: Container(

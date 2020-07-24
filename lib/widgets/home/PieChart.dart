@@ -7,7 +7,7 @@ class PieChart extends StatefulWidget {
     @required this.done,
     @required this.undone,
     @required this.total
-  }) : super(key : key);
+  }) : super(key: key);
 
   final double done;
   final double undone;
@@ -105,7 +105,6 @@ class PieChartPainter extends CustomPainter {
 
     Paint completeCircle = Paint()
       ..style = PaintingStyle.stroke
-      // ..strokeCap = StrokeCap.round
       ..strokeWidth = 60.0;
 
     double startRadian = -pi / 2;

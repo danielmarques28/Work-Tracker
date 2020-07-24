@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:worktracker/models/CalendarFile.dart';
@@ -19,7 +18,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   Map<String, dynamic> _calendar;
   bool _showCarousel = false;
-  String _selectedDate;
+  String _selectedDate = DateTime.now().toString().substring(0, 10);
   final GlobalKey<RowDayCardState> _rowDayGlobalKey
     = GlobalKey<RowDayCardState>();
   final GlobalKey<DayGraphState> _dayGraphGlobalKey
@@ -35,10 +34,7 @@ class _HomeState extends State<Home> {
 
   void _getCalendarContent() {
     CalendarFile().readFile().then((value) {
-      setState(() {
-        _calendar = value;
-        _selectedDate = DateTime.now().toString().substring(0, 10);
-      });
+      setState(() => _calendar = value);
     });
   }
 
@@ -51,9 +47,7 @@ class _HomeState extends State<Home> {
   }
 
   void _setSelectedDate(String date) {
-    setState(() {
-      _selectedDate = date;
-    });
+    setState(() => _selectedDate = date);
     Timer(
       Duration(milliseconds: 50), () {
         _dayGraphGlobalKey.currentState.setData();
@@ -85,27 +79,26 @@ class _HomeState extends State<Home> {
         child: CustomScrollView(
           slivers: [
             SliverToBoxAdapter(child: TopBar()),
-            SliverToBoxAdapter(child: Visibility(
-              maintainState: true,
-              visible: _showCarousel,
-              child: RowDayCard(
-                key: _rowDayGlobalKey,
-                updateSelectedDate: (date) => _setSelectedDate(date),
-                close: () => _setShowCarousel(false)
+            SliverToBoxAdapter(
+              child: AnimatedCrossFade(
+                firstChild: RowDayCard(
+                  key: _rowDayGlobalKey,
+                  updateSelectedDate: (date) => _setSelectedDate(date),
+                  close: () => _setShowCarousel(false)
+                ),
+                secondChild: InfoDay(
+                  selectedDate: _selectedDate,
+                  close: () {
+                    _setShowCarousel(true);
+                    _rowDayGlobalKey.currentState.startCountdown();
+                  }
+                ),
+                crossFadeState: _showCarousel
+                ? CrossFadeState.showFirst
+                : CrossFadeState.showSecond,
+                duration: Duration(milliseconds: 500)
               )
-            )),
-            SliverToBoxAdapter(child: Visibility(
-              visible: !_showCarousel,
-              child: _selectedDate != null
-                ? InfoDay(
-                    selectedDate: _selectedDate,
-                    close: () {
-                      _setShowCarousel(true);
-                      _rowDayGlobalKey.currentState.startCountdown();
-                    }
-                  )
-                : Container()
-            )),
+            ),
             SliverToBoxAdapter(
               child: _calendar != null
                 ? DayGraph(

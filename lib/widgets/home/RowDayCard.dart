@@ -71,7 +71,7 @@ class RowDayCardState extends State<RowDayCard> {
       },
       child: Container(
         margin: EdgeInsets.only(
-          top: 38.0,
+          top: 10.0,
           left: deviceWidth(context, 0.04),
           right: deviceWidth(context, 0.04)
         ),

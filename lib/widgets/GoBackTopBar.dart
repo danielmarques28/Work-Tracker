@@ -6,43 +6,47 @@ class CustomBackButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return FlatButton.icon(
       onPressed: () {
-        FocusScope.of(context).unfocus();
         Navigator.pop(context);
       },
       splashColor: Colors.white24,
       icon: Icon(Icons.arrow_back, color: Colors.white),
       label: Text(
         'Voltar',
-        style: TextStyle(color: Colors.white70)
+        style: TextStyle(color: Colors.white)
       ),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(30.0)
+        borderRadius: BorderRadius.circular(7.0)
       )
     );
   }
 }
 
 class GoBackTopBar extends StatelessWidget {
-  final String screenName;
+  final String screenTitle;
 
-  GoBackTopBar({@required this.screenName});
+  GoBackTopBar({@required this.screenTitle});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top: statusBarHeight(context)),
-      margin: EdgeInsets.only(
+      padding: EdgeInsets.only(
+        top: statusBarHeight(context),
         left: deviceWidth(context, 0.005),
         right: deviceWidth(context, 0.005)
       ),
       height: barHeight(context),
       width: deviceWidth(context),
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(width: 0.5, color: Colors.black54)
+        )
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           CustomBackButton(),
           Text(
-            screenName.toUpperCase(),
+            screenTitle.toUpperCase(),
             style: TextStyle(
               color: Colors.white,
               fontSize: textSize(context, 18.0),

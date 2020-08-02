@@ -64,7 +64,7 @@ class InfoDayState extends State<InfoDay> {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      margin: EdgeInsets.only(top: 38.0),
+      margin: EdgeInsets.only(top: 10.0),
       child: Material(
         color: Colors.transparent,
         child: InkWell(

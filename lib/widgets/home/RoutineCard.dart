@@ -2,9 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:worktracker/helpers/responsive.dart';
 
 class RoutineCard extends StatefulWidget {
-  RoutineCard({Key key, @required this.routine});
+  RoutineCard({
+    Key key,
+    @required this.routine,
+    @required this.status
+  }) : super(key: key);
 
-  final Map<String, dynamic> routine;
+  final Map<dynamic, dynamic> routine;
+  final int status;
 
   @override
   _RoutineCardState createState() => _RoutineCardState();
@@ -13,7 +18,7 @@ class RoutineCard extends StatefulWidget {
 class _RoutineCardState extends State<RoutineCard> {
   Color _decideCardColor() {
     Color color;
-    switch (widget.routine['status']) {
+    switch (widget.status) {
       case 1:
         color = Colors.white;
         break;
@@ -32,8 +37,9 @@ class _RoutineCardState extends State<RoutineCard> {
     return Material(
       color: Colors.transparent,
       child: InkWell(
-        onLongPress: () {
-          print('routine card long press');
+        borderRadius: BorderRadius.circular(7.0),
+        onTap: () {
+          print('press');
         },
         child: Container(
           width: deviceWidth(context, 0.95),
@@ -56,7 +62,7 @@ class _RoutineCardState extends State<RoutineCard> {
                 Align(
                   alignment: Alignment.topLeft,
                   child: Text(
-                    'Rotina ${widget.routine['routine_id']}'.toUpperCase(),
+                    '${widget.routine['name']}'.toUpperCase(),
                     textAlign: TextAlign.left,
                     style: TextStyle(
                       color: Colors.white,
@@ -68,7 +74,7 @@ class _RoutineCardState extends State<RoutineCard> {
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'Descrição sobre essa rotina',
+                    '${widget.routine['description']}',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: textSize(context, 15.0)

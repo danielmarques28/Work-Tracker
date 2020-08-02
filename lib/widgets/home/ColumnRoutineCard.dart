@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:worktracker/helpers/responsive.dart';
+import 'package:worktracker/models/RoutineFile.dart';
 import 'package:worktracker/widgets/home/RoutineCard.dart';
 
 class Background extends StatelessWidget {
@@ -80,11 +81,20 @@ class ColumnRoutineCardState extends State<ColumnRoutineCard> {
   final GlobalKey<AnimatedListState> _listGlobalKey
     = GlobalKey<AnimatedListState>();
   List<dynamic> _dayRoutines;
+  Map<String, dynamic> _routines;
 
   @override
   void initState() {
     super.initState();
     sortDayRoutines();
+    _getRoutines();
+  }
+
+  Future<void> _getRoutines() async {
+    await RoutineFile().readFile()
+      .then((routines) {
+        setState(() => _routines = routines['routines']);
+      });
   }
 
   sortDayRoutines() {
@@ -94,6 +104,14 @@ class ColumnRoutineCardState extends State<ColumnRoutineCard> {
         return a['status'].compareTo(b['status']);
       });
     });
+  }
+
+  addNewRoutine() async {
+    await _getRoutines();
+    _dayRoutines.insert(0, widget.dayRoutines.first);
+    final listState = _listGlobalKey.currentState;
+    if(listState != null)
+      listState.insertItem(0);
   }
 
   DismissDirection _decideDirection(int status) {
@@ -144,7 +162,7 @@ class ColumnRoutineCardState extends State<ColumnRoutineCard> {
         insertIndex = _dayRoutines.lastIndexWhere(
           (element) => element['status'] == 1
         );
-        insertIndex += 1;
+        insertIndex++;
       }
       else if(statusTarget == 3)
         insertIndex = _dayRoutines.length;
@@ -158,6 +176,7 @@ class ColumnRoutineCardState extends State<ColumnRoutineCard> {
   }
 
   Widget _buildDismissible(routine, index, animation) {
+    final int routineId = _dayRoutines[index]['routine_id'];
     return Dismissible(
       key: UniqueKey(),
       background: Background(
@@ -179,7 +198,12 @@ class ColumnRoutineCardState extends State<ColumnRoutineCard> {
       child: SizeTransition(
         axis: Axis.vertical,
         sizeFactor: animation,
-        child: RoutineCard(routine: routine)
+        child: _routines != null
+          ? RoutineCard(
+              routine: _routines['$routineId'],
+              status: _dayRoutines[index]['status']
+            )
+          : Container()
       )
     );
   }

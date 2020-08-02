@@ -10,6 +10,44 @@ import 'package:worktracker/widgets/home/ColumnRoutineCard.dart';
 import 'package:worktracker/widgets/home/TopBar.dart';
 import 'package:worktracker/widgets/home/DayGraph.dart';
 
+class FloatingButton extends StatelessWidget {
+  final Function getCalendarContent;
+  final GlobalKey<DayGraphState> dayGraphGlobalKey;
+  final GlobalKey<ColumnRoutineCardState> columnGlobalKey;
+
+  FloatingButton({
+    @required this.getCalendarContent,
+    @required this.dayGraphGlobalKey,
+    @required this.columnGlobalKey
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return FloatingActionButton(
+      backgroundColor: Colors.blueAccent,
+      onPressed: () {
+        Navigator.pushNamed(context, '/create-routine')
+          .then((calendar) {
+            if(calendar != null) {
+              getCalendarContent();
+              Timer(
+                Duration(milliseconds: 100), () {
+                  dayGraphGlobalKey.currentState.setData();
+                  columnGlobalKey.currentState.addNewRoutine();
+                }
+              );
+            }
+          });
+      },
+      child: Icon(
+        Icons.add,
+        size: 32.0,
+        color: Colors.white
+      )
+    );
+  }
+}
+
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
@@ -32,28 +70,29 @@ class _HomeState extends State<Home> {
     _getCalendarContent();
   }
 
-  void _getCalendarContent() {
-    CalendarFile().readFile().then((value) {
-      setState(() => _calendar = value);
-    });
+  Future<void> _getCalendarContent() async {
+    await CalendarFile().readFile()
+      .then((calendar) {
+        setState(() => _calendar = calendar);
+      });
   }
-
-  void _updateFile(List<dynamic> newDayRoutines) {
-    CalendarFile().updateDayRoutines(_selectedDate, newDayRoutines);
-  }
-
+  
   void _setShowCarousel(bool value) {
     setState(() => _showCarousel = value);
   }
 
-  void _setSelectedDate(String date) {
-    setState(() => _selectedDate = date);
+  void _updateChildWidgets() {
     Timer(
-      Duration(milliseconds: 50), () {
+      Duration(milliseconds: 100), () {
         _dayGraphGlobalKey.currentState.setData();
         _columnGlobalKey.currentState.sortDayRoutines();
       }
     );
+  }
+
+  void _setSelectedDate(String date) {
+    setState(() => _selectedDate = date);
+    _updateChildWidgets();
   }
 
   void _updateDayRoutines(newDayRoutines) {
@@ -61,7 +100,7 @@ class _HomeState extends State<Home> {
       _calendar[_selectedDate] = newDayRoutines;
     });
     _dayGraphGlobalKey.currentState.setData();
-    _updateFile(newDayRoutines);
+    CalendarFile().updateDayRoutines(_selectedDate, newDayRoutines);
   }
 
   @override
@@ -72,6 +111,12 @@ class _HomeState extends State<Home> {
     ]);
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
+      floatingActionButton: FloatingButton(
+        getCalendarContent: () => _getCalendarContent(),
+        dayGraphGlobalKey: _dayGraphGlobalKey,
+        columnGlobalKey: _columnGlobalKey
+      ),
       body: Container(
         height: deviceHeigth(context),
         width: deviceWidth(context),
@@ -112,8 +157,9 @@ class _HomeState extends State<Home> {
                 ? ColumnRoutineCard(
                     key: _columnGlobalKey,
                     dayRoutines: _calendar[_selectedDate],
-                    updateFile: (newDayRoutines) =>
-                      _updateDayRoutines(newDayRoutines)
+                    updateFile: (newDayRoutines) {
+                      _updateDayRoutines(newDayRoutines);
+                    }
                   )
                 : Container()
             )

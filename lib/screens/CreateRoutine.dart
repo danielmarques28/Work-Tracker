@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:worktracker/helpers/background.dart';
 import 'package:worktracker/helpers/responsive.dart';
@@ -23,21 +24,28 @@ class _RoutineFormState extends State<RoutineForm> {
         'name': _name,
         'description': _description
       };
-      RoutineFile().writeFile(routine);
+      RoutineFile().writeFile(routine)
+        .then((calendar) {
+          Timer(
+            Duration(milliseconds: 100),
+            () => Navigator.pop(context, calendar)
+          );
+        });
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: deviceHeigth(context, 0.85),
       margin: EdgeInsets.only(
-        top: deviceHeigth(context, 0.05),
-        left: deviceWidth(context, 0.05),
-        right: deviceWidth(context, 0.05)
+        top: deviceHeigth(context, 0.02),
+        left: deviceWidth(context, 0.025),
+        right: deviceWidth(context, 0.025)
       ),
       child: Form(
         key: _formKey,
-        autovalidate: true,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
         child: Column(
           children: [
             CustomTextField(
@@ -52,9 +60,7 @@ class _RoutineFormState extends State<RoutineForm> {
               isNotEmpty: true,
               value: (text) => setState(() => _description = text)
             ),
-            CustomSubmit(
-              callback: () => saveRoutine()
-            )
+            CustomSubmit(callback: () => saveRoutine())
           ]
         )
       )
@@ -70,20 +76,17 @@ class CreateRoutine extends StatefulWidget {
 class _CreateRoutineState extends State<CreateRoutine> {
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        print('create routine back-button');
-        return true;
-      },
-      child: Scaffold(
-        body: Container(
-          decoration: background(),
-          child: ListView(
-            children: [
-              GoBackTopBar(screenName: 'Criar Rotina'),
-              RoutineForm()
-            ]
-          )
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      body: Container(
+        width: deviceWidth(context),
+        height: deviceHeigth(context),
+        decoration: background(),
+        child: ListView(
+          children: [
+            GoBackTopBar(screenTitle: 'Criar Rotina'),
+            RoutineForm()
+          ]
         )
       )
     );

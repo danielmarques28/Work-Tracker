@@ -24,17 +24,6 @@ class CalendarFile {
     return calendar;
   }
 
-  List seedDay() {
-    List routines = [];
-    for (int i = 1; i <= 2; i++)
-      routines.add({'routine_id': i, 'status': 1});
-    for (int i = 3; i <= 4; i++)
-      routines.add({'routine_id': i, 'status': 2});
-    for (int i = 5; i <= 6; i++)
-      routines.add({'routine_id': i, 'status': 3});
-    return routines;
-  }
-
   Future<Map<String, dynamic>> readFile() async {
     String path = await _getLocalPath();
     _jsonFile = File('$path/$_fileName');

@@ -45,11 +45,11 @@ class DayGraphState extends State<DayGraph>
     double doneCount = 0;
     double undoneCount = 0;
     List<dynamic> dayRoutines = widget.dayRoutines;
-    for(Map<String, dynamic> dayRoutine in dayRoutines) {
+    for(Map<dynamic, dynamic> dayRoutine in dayRoutines) {
       if(dayRoutine['status'] == 2)
-        doneCount += 1;
+        doneCount++;
       else if(dayRoutine['status'] == 3)
-        undoneCount += 1;
+        undoneCount++;
     }
 
     setState(() {
@@ -84,7 +84,7 @@ class DayGraphState extends State<DayGraph>
       width: deviceWidth(context, 0.95),
       margin: EdgeInsets.symmetric(
         horizontal: deviceWidth(context, 0.025),
-        vertical: 90.0
+        vertical: 75.0
       ),
       alignment: Alignment.center,
       child: Container(
@@ -99,7 +99,7 @@ class DayGraphState extends State<DayGraph>
               total: total
             ),
             Container(
-              width: deviceWidth(context, 0.17),
+              width: deviceWidth(context, 0.16),
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
@@ -111,7 +111,7 @@ class DayGraphState extends State<DayGraph>
                   getPercentage(),
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: textSize(context, 22.0),
+                    fontSize: textSize(context, 21.0),
                     fontWeight: FontWeight.bold
                   )
                 )

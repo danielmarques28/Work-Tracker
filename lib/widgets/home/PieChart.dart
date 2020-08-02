@@ -99,7 +99,7 @@ class PieChartPainter extends CustomPainter {
     Paint outerCircle = Paint()
       ..style = PaintingStyle.stroke
       ..color = Colors.white24
-      ..strokeWidth = 60.0;
+      ..strokeWidth = 50.0;
 
     canvas.drawCircle(center, radius, outerCircle);
 
@@ -112,23 +112,25 @@ class PieChartPainter extends CustomPainter {
     List colors = [Colors.blueAccent, Colors.redAccent];
 
     double sweepRadian = 0;
-    for (int index = 0; index < 2; index++) {
-      if(index == 0)
-        sweepRadian = (done / total) * 2 * pi;
-      else
-        sweepRadian = (undone / total) * 2 * pi;
+    if(total != null) {
+      for (int index = 0; index < 2; index++) {
+        if(index == 0)
+          sweepRadian = (done / total) * 2 * pi;
+        else
+          sweepRadian = (undone / total) * 2 * pi;
 
-      completeCircle.color = colors[index];
+        completeCircle.color = colors[index];
 
-      canvas.drawArc(
-        Rect.fromCircle(center: center, radius: radius),
-        startRadian,
-        sweepRadian,
-        false,
-        completeCircle
-      );
+        canvas.drawArc(
+          Rect.fromCircle(center: center, radius: radius),
+          startRadian,
+          sweepRadian,
+          false,
+          completeCircle
+        );
 
-      startRadian += sweepRadian;
+        startRadian += sweepRadian;
+      }
     }
   }
 

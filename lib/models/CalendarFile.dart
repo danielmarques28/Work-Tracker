@@ -20,8 +20,6 @@ class CalendarFile {
       DateTime day = DateTime.now().add(Duration(days: -i));
       calendar[day.toString().substring(0, 10)] = [];
     }
-    String today = DateTime.now().toString().substring(0, 10);
-    calendar[today] = seedDay();
 
     return calendar;
   }
@@ -45,6 +43,23 @@ class CalendarFile {
       return json.decode(_jsonFile.readAsStringSync());
     else
       return createFile(_jsonFile);
+  }
+
+  Future<Map<String, dynamic>> addRoutineCalendar(
+    int id
+  ) async {
+    String path = await _getLocalPath();
+    _jsonFile = File('$path/$_fileName');
+    _fileExists = _jsonFile.existsSync();
+    if(_fileExists)
+      _fileContent = await readFile();
+    final Map newRoutine = {
+      'routine_id': id,
+      'status': 1
+    };
+    _fileContent.forEach((key, value) => value.insert(0, newRoutine));
+    _jsonFile.writeAsStringSync(json.encode(_fileContent));
+    return _fileContent;
   }
 
   Map<String, dynamic> createFile(File _jsonFile) {

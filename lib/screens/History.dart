@@ -7,13 +7,14 @@ class History extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Container(
         height: deviceHeigth(context),
         width: deviceWidth(context),
         decoration: background(),
         child: Column(
           children: [
-            GoBackTopBar(screenName: 'Histórico')
+            GoBackTopBar(screenTitle: 'Histórico')
           ]
         )
       )

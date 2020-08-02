@@ -26,40 +26,6 @@ class TouchButton extends StatelessWidget {
   }
 }
 
-class CreateRoutineButton extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 30.0,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(7.0),
-        boxShadow: [
-          BoxShadow(
-            offset: Offset(1.0, 3.0),
-            color: Colors.black,
-            blurRadius: 0.5,
-            spreadRadius: 0.5
-          )
-        ]
-      ),
-      child: FlatButton.icon(
-        onPressed: () =>
-          Navigator.pushNamed(context, '/create-routine'),
-        splashColor: Colors.white24,
-        color: Colors.blueAccent,
-        icon: Icon(Icons.add, color: Colors.white),
-        label: Text(
-          'ROTINA',
-          style: TextStyle(color: Colors.white)
-        ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(7.0)
-        )
-      )
-    );
-  }
-}
-
 class TopBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -75,8 +41,7 @@ class TopBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           TouchButton(icon: Icons.history, type: 'history'),
-          CreateRoutineButton(),
-          TouchButton(icon: Icons.settings, type: 'settings'),
+          TouchButton(icon: Icons.settings, type: 'settings')
         ]
       )
     );

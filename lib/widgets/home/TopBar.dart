@@ -16,7 +16,7 @@ class TouchButton extends StatelessWidget {
     return Material(
       color: Colors.transparent,
       child: IconButton(
-        color: Colors.black26,
+        color: Colors.red,
         iconSize: 27.0,
         splashRadius: 21.0,
         icon: Icon(icon, color: Colors.white),
@@ -41,7 +41,7 @@ class TopBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           TouchButton(icon: Icons.history, type: 'history'),
-          TouchButton(icon: Icons.settings, type: 'settings')
+          // TouchButton(icon: Icons.settings, type: 'settings')
         ]
       )
     );

@@ -16,8 +16,8 @@ class CustomSubmit extends StatelessWidget {
         minWidth: deviceWidth(context, 0.95),
         height: 52.0,
         child: RaisedButton.icon(
-          splashColor: Colors.white24,
-          color: Color(0xFF1A4F95),
+          splashColor: Theme.of(context).splashColor,
+          color: Theme.of(context).primaryColor,
           onPressed: () => callback(),
           icon: Icon(
             Icons.create,

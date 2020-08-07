@@ -1,6 +1,5 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:worktracker/helpers/responsive.dart';
 
 class PieChart extends StatefulWidget {
   PieChart({
@@ -110,7 +109,7 @@ class PieChartPainter extends CustomPainter {
 
     double startRadian = -pi / 2;
 
-    List colors = [Color(0xFF0FA9AB), Color(0xFFEA4A64)];
+    List colors = [Color(0xFF1A4F95), Color(0xFFEA4A64)];
 
     double sweepRadian = 0;
     if(total != null) {

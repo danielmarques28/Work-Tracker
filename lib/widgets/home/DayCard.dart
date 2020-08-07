@@ -22,7 +22,9 @@ class _DayCardState extends State<DayCard> {
       width: deviceWidth(context, 0.1658),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(7.0),
-        color: widget.active ? Color(0xFF1A4F95) : Colors.black.withOpacity(0.2)
+        color: widget.active
+        ? Theme.of(context).primaryColor
+        : Theme.of(context).cardColor
       ),
       duration: Duration(milliseconds: 300),
       child: Column(

@@ -78,11 +78,9 @@ class _CreateRoutineState extends State<CreateRoutine> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Color(0xFF1F253D),
       body: Container(
         width: deviceWidth(context),
         height: deviceHeigth(context),
-        // decoration: background(),
         child: ListView(
           children: [
             GoBackTopBar(screenTitle: 'Criar Rotina'),

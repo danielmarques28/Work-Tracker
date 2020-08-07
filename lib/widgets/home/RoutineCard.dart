@@ -21,9 +21,9 @@ class _RoutineCardState extends State<RoutineCard> {
       case 1:
         return Colors.transparent;
       case 2:
-        return Color(0xFF0FA9AB);
+        return Theme.of(context).primaryColor;
       case 3:
-        return Color(0xFFEA4A64);
+        return Theme.of(context).accentColor;
       default:
         return Colors.transparent;
     }
@@ -42,9 +42,12 @@ class _RoutineCardState extends State<RoutineCard> {
           width: deviceWidth(context, 0.95),
           height: 89.0,
           decoration: BoxDecoration(
-            color: Colors.black.withOpacity(0.2),
+            color: Theme.of(context).cardColor,
             borderRadius: BorderRadius.circular(7.0),
-            border: Border.all(width: 1.0, color: _decideCardColor(widget.status))
+            border: Border.all(
+              width: 1.0,
+              color: _decideCardColor(widget.status)
+            )
           ),
           child: Container(
             padding: EdgeInsets.only(

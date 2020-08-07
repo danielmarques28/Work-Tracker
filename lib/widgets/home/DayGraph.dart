@@ -99,7 +99,7 @@ class DayGraphState extends State<DayGraph>
               total: total
             ),
             Container(
-              width: deviceWidth(context, 0.16),
+              width: deviceWidth(context, 0.17),
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,

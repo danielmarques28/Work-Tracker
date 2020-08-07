@@ -23,7 +23,7 @@ class FloatingButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-      backgroundColor: Color(0xFF1A4F95),
+      backgroundColor: Theme.of(context).primaryColor,
       onPressed: () {
         Navigator.pushNamed(context, '/create-routine')
           .then((calendar) {
@@ -116,7 +116,6 @@ class _HomeState extends State<Home> {
     ]);
 
     return Scaffold(
-      backgroundColor: Color(0xFF1F253D),
       resizeToAvoidBottomInset: false,
       floatingActionButton: FloatingButton(
         getCalendarContent: () => _getCalendarContent(),
@@ -126,7 +125,6 @@ class _HomeState extends State<Home> {
       body: Container(
         height: deviceHeigth(context),
         width: deviceWidth(context),
-        // decoration: background(),
         child: CustomScrollView(
           slivers: [
             SliverToBoxAdapter(child: TopBar()),

@@ -8,7 +8,7 @@ class CustomBackButton extends StatelessWidget {
       onPressed: () {
         Navigator.pop(context);
       },
-      splashColor: Colors.white24,
+      splashColor: Theme.of(context).splashColor,
       icon: Icon(Icons.arrow_back, color: Colors.white),
       label: Text(
         'Voltar',

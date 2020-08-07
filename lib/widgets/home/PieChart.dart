@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:worktracker/helpers/responsive.dart';
 
 class PieChart extends StatefulWidget {
   PieChart({
@@ -94,26 +95,26 @@ class PieChartPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     Offset center = Offset(size.width / 2, size.height / 2);
-    double radius = min(size.width / 2.7, size.height / 2.7);
+    double radius = min(size.width / 2.8, size.height / 2.8);
 
     Paint outerCircle = Paint()
       ..style = PaintingStyle.stroke
       ..color = Colors.white24
-      ..strokeWidth = 50.0;
+      ..strokeWidth = size.width * 0.12;
 
     canvas.drawCircle(center, radius, outerCircle);
 
     Paint completeCircle = Paint()
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 60.0;
+      ..strokeWidth = size.width * 0.155;
 
     double startRadian = -pi / 2;
 
-    List colors = [Colors.blueAccent, Colors.redAccent];
+    List colors = [Color(0xFF0FA9AB), Color(0xFFEA4A64)];
 
     double sweepRadian = 0;
     if(total != null) {
-      for (int index = 0; index < 2; index++) {
+      for(int index = 0; index < 2; index++) {
         if(index == 0)
           sweepRadian = (done / total) * 2 * pi;
         else

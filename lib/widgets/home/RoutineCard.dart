@@ -16,20 +16,17 @@ class RoutineCard extends StatefulWidget {
 }
 
 class _RoutineCardState extends State<RoutineCard> {
-  Color _decideCardColor() {
-    Color color;
-    switch (widget.status) {
+  Color _decideCardColor(int status) {
+    switch (status) {
       case 1:
-        color = Colors.white;
-        break;
+        return Colors.transparent;
       case 2:
-        color = Colors.blueAccent;
-        break;
+        return Color(0xFF0FA9AB);
       case 3:
-        color = Colors.redAccent;
-        break;
+        return Color(0xFFEA4A64);
+      default:
+        return Colors.transparent;
     }
-    return color.withOpacity(0.24);
   }
 
   @override
@@ -45,8 +42,9 @@ class _RoutineCardState extends State<RoutineCard> {
           width: deviceWidth(context, 0.95),
           height: 89.0,
           decoration: BoxDecoration(
-            color: _decideCardColor(),
-            borderRadius: BorderRadius.circular(7.0)
+            color: Colors.black.withOpacity(0.2),
+            borderRadius: BorderRadius.circular(7.0),
+            border: Border.all(width: 1.0, color: _decideCardColor(widget.status))
           ),
           child: Container(
             padding: EdgeInsets.only(

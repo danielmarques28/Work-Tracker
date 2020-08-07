@@ -75,7 +75,7 @@ class RowDayCardState extends State<RowDayCard> {
           left: deviceWidth(context, 0.04),
           right: deviceWidth(context, 0.04)
         ),
-        height: 79.0,
+        height: 72.0,
         child: ListView.builder(
           reverse: true,
           shrinkWrap: true,

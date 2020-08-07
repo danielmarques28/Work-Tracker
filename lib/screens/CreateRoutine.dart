@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:worktracker/helpers/background.dart';
+
 import 'package:worktracker/helpers/responsive.dart';
 import 'package:worktracker/models/RoutineFile.dart';
 import 'package:worktracker/widgets/CustomSubmit.dart';
@@ -78,10 +78,11 @@ class _CreateRoutineState extends State<CreateRoutine> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
+      backgroundColor: Color(0xFF1F253D),
       body: Container(
         width: deviceWidth(context),
         height: deviceHeigth(context),
-        decoration: background(),
+        // decoration: background(),
         child: ListView(
           children: [
             GoBackTopBar(screenTitle: 'Criar Rotina'),

@@ -180,12 +180,12 @@ class ColumnRoutineCardState extends State<ColumnRoutineCard> {
     return Dismissible(
       key: UniqueKey(),
       background: Background(
-        color: Colors.blueAccent,
+        color: Color(0xFF0FA9AB),
         icon: Icons.check,
         direction: DismissDirection.startToEnd
       ),
       secondaryBackground: Background(
-        color: Colors.redAccent,
+        color: Color(0xFFEA4A64),
         icon: Icons.close,
         direction: DismissDirection.endToStart
       ),

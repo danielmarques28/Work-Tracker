@@ -30,14 +30,14 @@ class InfoColumn extends StatelessWidget {
           _getWeekDay(),
           style: TextStyle(
             color: Colors.white,
-            fontSize: textSize(context, 32.0),
+            fontSize: textSize(context, 30.0),
           )
         ),
         Text(
           _getDate(),
           style: TextStyle(
             color: Color(0xFFC0C2C5),
-            fontSize: textSize(context, 21.0)
+            fontSize: textSize(context, 19.0)
           )
         )
       ]
@@ -76,11 +76,11 @@ class InfoDayState extends State<InfoDay> {
             );
           },
           child: Container(
-            height: 79.0,
+            height: 72.0,
             width: deviceWidth(context, 0.95),
             padding: EdgeInsets.only(
-              top: deviceHeigth(context, 0.01),
-              bottom: deviceHeigth(context, 0.01)
+              top: 6.0,
+              bottom: 6.0
             ),
             child: InfoColumn(selectedDate: widget.selectedDate)
           )

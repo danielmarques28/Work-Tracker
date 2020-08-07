@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:worktracker/models/CalendarFile.dart';
 import 'package:worktracker/helpers/responsive.dart';
-import 'package:worktracker/helpers/background.dart';
 import 'package:worktracker/widgets/home/RowDayCard.dart';
 import 'package:worktracker/widgets/home/InfoDay.dart';
 import 'package:worktracker/widgets/home/ColumnRoutineCard.dart';
@@ -24,7 +23,7 @@ class FloatingButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-      backgroundColor: Colors.blueAccent,
+      backgroundColor: Color(0xFF1A4F95),
       onPressed: () {
         Navigator.pushNamed(context, '/create-routine')
           .then((calendar) {
@@ -71,9 +70,15 @@ class _HomeState extends State<Home> {
   }
 
   Future<void> _getCalendarContent() async {
-    await CalendarFile().readFile()
+    CalendarFile().readFile()
       .then((calendar) {
         setState(() => _calendar = calendar);
+        if(_calendar[_selectedDate] == null) {
+          CalendarFile().saveTodayInFile(_selectedDate)
+            .then((newCalendar) {
+              setState(() => _calendar = newCalendar);
+            });
+        }
       });
   }
   
@@ -111,6 +116,7 @@ class _HomeState extends State<Home> {
     ]);
 
     return Scaffold(
+      backgroundColor: Color(0xFF1F253D),
       resizeToAvoidBottomInset: false,
       floatingActionButton: FloatingButton(
         getCalendarContent: () => _getCalendarContent(),
@@ -120,7 +126,7 @@ class _HomeState extends State<Home> {
       body: Container(
         height: deviceHeigth(context),
         width: deviceWidth(context),
-        decoration: background(),
+        // decoration: background(),
         child: CustomScrollView(
           slivers: [
             SliverToBoxAdapter(child: TopBar()),

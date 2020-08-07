@@ -84,7 +84,7 @@ class DayGraphState extends State<DayGraph>
       width: deviceWidth(context, 0.95),
       margin: EdgeInsets.symmetric(
         horizontal: deviceWidth(context, 0.025),
-        vertical: 75.0
+        vertical: deviceHeigth(context, 0.1)
       ),
       alignment: Alignment.center,
       child: Container(
@@ -103,7 +103,7 @@ class DayGraphState extends State<DayGraph>
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: Colors.blueAccent
+                border: Border.all(color: Colors.white24, width: 0.5)
               ),
               child: AnimatedBuilder(
                 animation: _controllerAnimation,
@@ -111,7 +111,7 @@ class DayGraphState extends State<DayGraph>
                   getPercentage(),
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: textSize(context, 21.0),
+                    fontSize: textSize(context, 19.0),
                     fontWeight: FontWeight.bold
                   )
                 )

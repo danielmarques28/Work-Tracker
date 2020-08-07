@@ -19,11 +19,10 @@ class _DayCardState extends State<DayCard> {
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
-      height: 79.0,
-      width: deviceWidth(context, 0.168),
+      width: deviceWidth(context, 0.1658),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(7.0),
-        color: widget.active ? Colors.blueAccent : Colors.white24
+        color: widget.active ? Color(0xFF1A4F95) : Colors.black.withOpacity(0.2)
       ),
       duration: Duration(milliseconds: 300),
       child: Column(
